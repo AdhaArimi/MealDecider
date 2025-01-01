@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Meal Decision Maker</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="styles.css" rel="stylesheet">
+</head>
+<body>
+    <div class="container py-5">
+        <div class="row justify-content-center">
+            <div class="col-md-8 text-center">
+                <h1 class="mb-4">What Should I Eat?</h1>
+                <div class="meal-decision-box p-4 mb-4">
+                    <div id="mealResult" class="mb-4">
+                        <p class="fs-4">Push the button to get your meal suggestion!</p>
+                    </div>
+                    <button id="decideMealBtn" class="btn btn-primary btn-lg pulse-animation">
+                        Decide My Meal!
+                    </button>
+                </div>
+
+                <!-- Image Upload Section (Initially Hidden) -->
+                <div id="uploadSection" class="meal-decision-box p-4 d-none">
+                    <h3 class="mb-3">Upload Your Meal Picture</h3>
+                    <p class="text-muted mb-4">Take a picture of the meal you decided on to earn rewards!</p>
+                    
+                    <form id="uploadForm" class="text-center">
+                        <div class="mb-4">
+                            <div class="upload-preview mb-3">
+                                <img id="imagePreview" class="img-fluid d-none rounded" alt="Preview">
+                            </div>
+                            <div class="input-group">
+                                <input type="file" 
+                                       class="form-control" 
+                                       id="mealImage" 
+                                       accept="image/*"
+                                       capture="environment"
+                                       required>
+                                <button class="btn btn-success" type="submit">
+                                    Submit Picture
+                                </button>
+                            </div>
+                        </div>
+                        <div id="uploadFeedback" class="alert d-none" role="alert"></div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Load scripts in correct order -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="script.js"></script>
+</body>
+</html> 

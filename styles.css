@@ -1,0 +1,17 @@
+.meal-decision-box {
+    background-color: #f8f9fa;
+    border-radius: 1rem;
+    box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15);
+}
+
+.pulse-animation {
+    transition: transform 0.2s;
+}
+
+.pulse-animation:hover {
+    transform: scale(1.05);
+}
+
+#mealResult {
+    min-height: 60px;
+} 

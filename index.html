@@ -13,12 +13,28 @@
         <div class="row justify-content-center">
             <div class="col-md-8 text-center">
                 <h1 class="mb-4">What Should I Eat?</h1>
+                <p class="text-muted mb-4">Get AI-powered meal suggestions based on food categories!</p>
                 <div class="meal-decision-box p-4 mb-4">
-                    <div id="mealResult" class="mb-4">
-                        <p class="fs-4">Push the button to get your meal suggestion!</p>
+                    <div class="mb-4">
+                        <select id="categorySelect" class="form-select form-select-lg mb-3">
+                            <option value="" selected disabled>Choose a category</option>
+                            <option value="Healthy">Healthy 🥗</option>
+                            <option value="Fast">Fast Food 🍔</option>
+                            <option value="Asian">Asian 🍜</option>
+                            <option value="Italian">Italian 🍝</option>
+                            <option value="Mexican">Mexican 🌮</option>
+                            <option value="Dessert">Dessert 🍰</option>
+                            <option value="Breakfast">Breakfast 🍳</option>
+                            <option value="Vegetarian">Vegetarian 🥬</option>
+                            <option value="Seafood">Seafood 🦐</option>
+                            <option value="Comfort">Comfort Food 🍲</option>
+                        </select>
                     </div>
-                    <button id="decideMealBtn" class="btn btn-primary btn-lg pulse-animation">
-                        Decide My Meal!
+                    <div id="mealResult" class="mb-4">
+                        <p class="fs-4">Select a category and click the button for a meal suggestion!</p>
+                    </div>
+                    <button id="decideMealBtn" class="btn btn-primary btn-lg pulse-animation" disabled>
+                        Get Meal Suggestion!
                     </button>
                 </div>
 
@@ -53,6 +69,7 @@
 
     <!-- Load scripts in correct order -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="script.js"></script>
+    <script src="fallbackMeals.js" type="module"></script>
+    <script src="script.js" type="module"></script>
 </body>
 </html> 

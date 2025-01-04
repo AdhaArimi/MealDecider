@@ -1,3 +1,4 @@
+console.log("script.js is running");
 // Import the fallback meals
 import { fallbackMeals } from './fallbackMeals.js';
 

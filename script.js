@@ -15,11 +15,44 @@ document.addEventListener('DOMContentLoaded', function() {
     const imagePreview = document.getElementById('imagePreview');
     const uploadFeedback = document.getElementById('uploadFeedback');
 
-    // Enable/disable button based on category selection
-    categorySelect.addEventListener('change', function() {
-        decideMealBtn.disabled = !this.value;
-        if (this.value) {
-            currentCategory = this.value;
+    // Enable the button by default since "I don't mind" is selected
+    decideMealBtn.disabled = false;
+
+    // Function to randomize category selection
+    function randomizeCategory() {
+        const options = Array.from(categorySelect.options)
+            .filter(option => option.value !== 'dontMind');
+        const randomOption = options[Math.floor(Math.random() * options.length)];
+        return randomOption.value;
+    }
+
+    // Handle button click for meal suggestion
+    decideMealBtn.addEventListener('click', async function() {
+        let selectedCategory = categorySelect.value;
+        let selectedCategoryFinal;
+
+        if (selectedCategory === 'dontMind') {
+            // Randomize category selection excluding "I don't mind"
+            selectedCategoryFinal = randomizeCategory();
+        } else {
+            selectedCategoryFinal = selectedCategory;
+        }
+
+        console.log('Selected category for suggestion:', selectedCategoryFinal);
+        currentCategory = selectedCategoryFinal;
+
+        try {
+            const suggestion = await getMealSuggestion(currentCategory);
+            currentMeal = suggestion;
+            mealResult.innerHTML = `
+                <p class="fs-2 fw-bold text-primary mb-0">${suggestion}</p>
+            `;
+            uploadSection.classList.remove('d-none');
+        } catch (error) {
+            console.error('Suggestion error:', error);
+            mealResult.innerHTML = '<p class="text-danger">Error getting meal suggestion. Please try again.</p>';
+        } finally {
+            decideMealBtn.disabled = false;
         }
     });
 
@@ -87,6 +120,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
                 // Add emoji and return result
                 const categoryEmojis = {
+                    "dontMind": "🤷",
                     "Healthy": "🥗",
                     "Fast": "🍔",
                     "Asian": "🍜",
@@ -122,25 +156,6 @@ document.addEventListener('DOMContentLoaded', function() {
         const options = fallbackMeals[category] || [`${category} Special 🍽️`];
         return options[Math.floor(Math.random() * options.length)];
     }
-
-    decideMealBtn.addEventListener('click', async function() {
-        if (!categorySelect.value) return;
-        decideMealBtn.disabled = true;
-        
-        try {
-            const suggestion = await getMealSuggestion(currentCategory);
-            currentMeal = suggestion;
-            mealResult.innerHTML = `
-                <p class="fs-2 fw-bold text-primary mb-0">${suggestion}</p>
-            `;
-            uploadSection.classList.remove('d-none');
-        } catch (error) {
-            console.error('Suggestion error:', error);
-            mealResult.innerHTML = '<p class="text-danger">Error getting meal suggestion. Please try again.</p>';
-        } finally {
-            decideMealBtn.disabled = false;
-        }
-    });
 
     // Handle image preview
     document.getElementById('mealImage').addEventListener('change', function(e) {

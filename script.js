@@ -3,8 +3,8 @@ console.log("script.js is running");
 import { fallbackMeals } from './fallbackMeals.js';
 
 document.addEventListener('DOMContentLoaded', function() {
-    const HF_ACCESS_TOKEN = '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';
-    
+    const HF_ACCESS_TOKEN = process.env.API_KEY;
+
     let currentMeal = '';
     let currentCategory = '';
     const categorySelect = document.getElementById('categorySelect');
